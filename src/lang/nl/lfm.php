@@ -59,6 +59,7 @@ return [
     'btn-crop'            => 'Bijsnijden',
     'btn-copy-crop'       => 'Kopiëren & Bijsnijden',
     'btn-cancel'          => 'Annuleren',
+    'btn-confirm'         => 'Bevestigen',
     'btn-resize'          => 'Formaat aanpassen',
 
     'resize-ratio'        => 'Ratio:',
