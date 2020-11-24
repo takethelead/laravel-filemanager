@@ -31,7 +31,7 @@
 ・
   <a href="https://github.com/UniSharp/laravel-filemanager/wiki">FAQ</a>
 </p>
-
+forked
 ## v2.0 progress
 🎉 Finally v2.0.0 has been released! 🎉
 
