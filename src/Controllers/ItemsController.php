@@ -24,6 +24,9 @@ class ItemsController extends LfmController
 
         return [
             'items' => array_map(function ($item) {
+                return cache()->rememberForever($item->path(), function() use($item) {
+                    return $item->fill()->attributes;
+                });
                 return $item->fill()->attributes;
             }, array_slice($items, ($currentPage - 1) * $perPage, $perPage)),
             'paginator' => [

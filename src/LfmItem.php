@@ -20,7 +20,15 @@ class LfmItem
         $this->lfm = $lfm->thumb(false);
         $this->helper = $helper;
         $this->isDirectory = $isDirectory;
-        $this->columns = $helper->config('item_columns')??['name', 'url', 'time', 'icon', 'is_file', 'is_image', 'thumb_url'];
+        $this->columns = [
+            'name',
+            'url',
+            'time',
+            'icon',
+            'is_file',
+            'is_image',
+            'thumb_url',
+        ];
     }
 
     public function __get($var_name)
@@ -59,13 +67,13 @@ class LfmItem
 
     public function isFile()
     {
-        return ! $this->isDirectory();
+        return !$this->isDirectory();
     }
 
     /**
      * Check a file is image or not.
      *
-     * @param  mixed  $file  Real path of a file or instance of UploadedFile.
+     * @param mixed $file Real path of a file or instance of UploadedFile.
      * @return bool
      */
     public function isImage()
@@ -76,7 +84,7 @@ class LfmItem
     /**
      * Get mime type of a file.
      *
-     * @param  mixed  $file  Real path of a file or instance of UploadedFile.
+     * @param mixed $file Real path of a file or instance of UploadedFile.
      * @return string
      */
     public function mimeType()
@@ -189,8 +197,8 @@ class LfmItem
     /**
      * Make file size readable.
      *
-     * @param  int  $bytes     File size in bytes.
-     * @param  int  $decimals  Decimals.
+     * @param int $bytes File size in bytes.
+     * @param int $decimals Decimals.
      * @return string
      */
     public function humanFilesize($bytes, $decimals = 2)
