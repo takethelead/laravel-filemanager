@@ -272,16 +272,6 @@ class Lfm
                 'as' => 'getItems',
             ]);
 
-            Route::get('/move', [
-                'uses' => 'ItemsController@move',
-                'as' => 'move',
-            ]);
-
-            Route::get('/domove', [
-                'uses' => 'ItemsController@domove',
-                'as' => 'domove'
-            ]);
-
             // folders
             Route::get('/newfolder', [
                 'uses' => 'FolderController@getAddfolder',
@@ -292,36 +282,6 @@ class Lfm
             Route::get('/folders', [
                 'uses' => 'FolderController@getFolders',
                 'as' => 'getFolders',
-            ]);
-
-            // crop
-            Route::get('/crop', [
-                'uses' => 'CropController@getCrop',
-                'as' => 'getCrop',
-            ]);
-            Route::get('/cropimage', [
-                'uses' => 'CropController@getCropimage',
-                'as' => 'getCropimage',
-            ]);
-            Route::get('/cropnewimage', [
-                'uses' => 'CropController@getNewCropimage',
-                'as' => 'getCropnewimage',
-            ]);
-
-            // rename
-            Route::get('/rename', [
-                'uses' => 'RenameController@getRename',
-                'as' => 'getRename',
-            ]);
-
-            // scale/resize
-            Route::get('/resize', [
-                'uses' => 'ResizeController@getResize',
-                'as' => 'getResize',
-            ]);
-            Route::get('/doresize', [
-                'uses' => 'ResizeController@performResize',
-                'as' => 'performResize',
             ]);
 
             // download
@@ -335,8 +295,6 @@ class Lfm
                 'uses' => 'DeleteController@getDelete',
                 'as' => 'getDelete',
             ]);
-
-            Route::get('/demo', 'DemoController@index');
         });
     }
 }
