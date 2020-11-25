@@ -16,6 +16,7 @@ return [
     'menu-download'       => 'Download',
     'menu-resize'         => 'Formaat aanpassen',
     'menu-crop'           => 'Bijsnijden',
+    'menu-multiple'       => 'Meerdere selecteren',
 
     'title-page'          => 'File Manager',
     'title-panel'         => 'Laravel FileManager',
