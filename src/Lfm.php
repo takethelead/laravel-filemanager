@@ -6,8 +6,6 @@ use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use UniSharp\LaravelFilemanager\Middlewares\CreateDefaultFolder;
-use UniSharp\LaravelFilemanager\Middlewares\MultiUser;
 
 class Lfm
 {
@@ -242,7 +240,7 @@ class Lfm
      */
     public static function routes()
     {
-        $middleware = [ CreateDefaultFolder::class, MultiUser::class ];
+        $middleware = config('lfm.middleware', []);
         $as = 'unisharp.lfm.';
         $namespace = '\\UniSharp\\LaravelFilemanager\\Controllers\\';
 
