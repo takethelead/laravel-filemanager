@@ -19,7 +19,7 @@ return [
     'menu-multiple'       => 'Meerdere selecteren',
 
     'title-page'          => 'File Manager',
-    'title-panel'         => 'Laravel FileManager',
+    'title-panel'         => 'File manager',
     'title-upload'        => 'Bestand uploaden',
     'title-view'          => 'Bestand bekijken',
     'title-user'          => 'Bestanden',

@@ -20,7 +20,7 @@ return [
     'menu-multiple'     => 'Multi-selection',
 
     'title-page'        => 'File Manager',
-    'title-panel'       => 'Laravel FileManager',
+    'title-panel'       => 'File manager',
     'title-upload'      => 'Upload File(s)',
     'title-view'        => 'View File',
     'title-user'        => 'Files',
