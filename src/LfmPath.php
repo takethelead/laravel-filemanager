@@ -85,7 +85,17 @@ class LfmPath
 
     public function url()
     {
-        return $this->storage->url($this->path('url'));
+        $url = $this->storage->url($this->path('url'));
+
+        $cdnUrl = $this->helper->config('cdn_url');
+
+        if (!empty($cdnUrl)) {
+            $path = parse_url($url)['path'];
+
+            return $cdnUrl . $path;
+        }
+
+        return $url;
     }
 
     public function folders()
@@ -115,7 +125,7 @@ class LfmPath
         return Container::getInstance()->makeWith(LfmItem::class, [
             'lfm' => (clone $this)->setName($this->helper->getNameFromPath($item_path)),
             'helper' => $this->helper,
-            'isDirectory' => $isDirectory
+            'isDirectory' => $isDirectory,
         ]);
     }
 
@@ -131,7 +141,7 @@ class LfmPath
     /**
      * Create folder if not exist.
      *
-     * @param  string  $path  Real path of a directory.
+     * @param string $path Real path of a directory.
      * @return bool
      */
     public function createFolder()
@@ -158,7 +168,7 @@ class LfmPath
     /**
      * Check a folder and its subfolders is empty or not.
      *
-     * @param  string  $directory_path  Real path of a directory.
+     * @param string $directory_path Real path of a directory.
      * @return bool
      */
     public function directoryIsEmpty()
@@ -170,7 +180,7 @@ class LfmPath
     {
         $path = $this->working_dir
             ?: $this->helper->input('working_dir')
-            ?: $this->helper->getRootFolder();
+                ?: $this->helper->getRootFolder();
 
         if ($this->is_thumb) {
             // Prevent if working dir is "/" normalizeWorkingDir will add double "//" that breaks S3 functionality
@@ -188,7 +198,7 @@ class LfmPath
     /**
      * Sort files and directories.
      *
-     * @param  mixed  $arr_items  Array of files or folders or both.
+     * @param mixed $arr_items Array of files or folders or both.
      * @return array of object
      */
     public function sortByColumn($arr_items)
@@ -224,6 +234,7 @@ class LfmPath
             $new_file_name = $this->saveFile($file, $new_file_name);
         } catch (\Exception $e) {
             \Log::info($e);
+
             return $this->error('invalid');
         }
         // TODO should be "FileWasUploaded"
@@ -236,7 +247,7 @@ class LfmPath
     {
         if (empty($file)) {
             return $this->error('file-empty');
-        } elseif (! $file instanceof UploadedFile) {
+        } elseif (!$file instanceof UploadedFile) {
             return $this->error('instance');
         } elseif ($file->getError() == UPLOAD_ERR_INI_SIZE) {
             return $this->error('file-size', ['max' => ini_get('upload_max_filesize')]);
@@ -297,11 +308,11 @@ class LfmPath
             $file_name_without_extentions = $new_file_name;
             while ($this->setName(($extension) ? $new_file_name_with_extention : $new_file_name)->exists()) {
                 if (config('lfm.alphanumeric_filename') === true) {
-                    $suffix = '_'.$counter;
+                    $suffix = '_' . $counter;
                 } else {
                     $suffix = " ({$counter})";
                 }
-                $new_file_name = $file_name_without_extentions.$suffix;
+                $new_file_name = $file_name_without_extentions . $suffix;
 
                 if ($extension) {
                     $new_file_name_with_extention = $new_file_name . '.' . $extension;

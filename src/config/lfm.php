@@ -25,6 +25,8 @@ return [
         MultiUser::class,
     ],
 
+    'cdn_url' => env('LFM_CDN_URL', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Shared folder / Private folder
