@@ -5,6 +5,7 @@ namespace UniSharp\LaravelFilemanager\Controllers;
 use Illuminate\Support\Facades\Storage;
 use UniSharp\LaravelFilemanager\Events\ImageIsDeleting;
 use UniSharp\LaravelFilemanager\Events\ImageWasDeleted;
+use UniSharp\LaravelFilemanager\Lfm;
 
 class DeleteController extends LfmController
 {
@@ -31,18 +32,18 @@ class DeleteController extends LfmController
             event(new ImageIsDeleting($file_path));
 
             if (is_null($name_to_delete)) {
-                array_push($errors, parent::error('folder-name'));
+                array_push($errors, trans(Lfm::PACKAGE_NAME . '::lfm.error-' . 'folder-name'));
                 continue;
             }
 
-            if (! $this->lfm->setName($name_to_delete)->exists()) {
-                array_push($errors, parent::error('folder-not-found', ['folder' => $file_path]));
+            if (!$this->lfm->setName($name_to_delete)->exists()) {
+                array_push($errors, trans(Lfm::PACKAGE_NAME . '::lfm.error-' . 'folder-not-found', ['folder' => $file_path]));
                 continue;
             }
 
             if ($this->lfm->setName($name_to_delete)->isDirectory()) {
-                if (! $this->lfm->setName($name_to_delete)->directoryIsEmpty()) {
-                    array_push($errors, parent::error('delete-folder'));
+                if (!$this->lfm->setName($name_to_delete)->directoryIsEmpty()) {
+                    array_push($errors, trans(Lfm::PACKAGE_NAME . '::lfm.error-' . 'delete-folder'));
                     continue;
                 }
             } else {
